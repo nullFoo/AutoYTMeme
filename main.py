@@ -18,10 +18,10 @@ def getVideos(amount):
                      client_secret='MULo2NdZ9jPID9PDeI8cL01mTaQ',
                      user_agent='reddit->discord bot')
 
-    subs = ["funny"]
+    subs = ["PlayItAgainSam", "funny", "ContagiousLaughter".]
     posts = []
     for sub in subs:
-        posts += list(reddit.subreddit(sub).new(limit=30))
+        posts += list(reddit.subreddit(sub).new(limit=10))
 
     videoLinks = []
     for post in posts:
