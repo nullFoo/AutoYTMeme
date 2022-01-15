@@ -35,26 +35,29 @@ def getVideos(amount):
 
     logStr("Combining video with audio and saving")
     for vid in range(len(videoLinks)):
-        videoLink = videoLinks[vid]
-        urllib.request.urlretrieve(
-            videoLink,
-            filename="tmp/video"+str(vid)+".mp4",
-        )
-        audioLink = videoLink.split("DASH_")[0] + "DASH_audio.mp4" + videoLink.split(".mp4")[1]
-        urllib.request.urlretrieve(
-            audioLink,
-            filename="tmp/audio"+str(vid)+".mp4",
-        )
+        try:
+            videoLink = videoLinks[vid]
+            urllib.request.urlretrieve(
+                videoLink,
+                filename="tmp/video"+str(vid)+".mp4",
+            )
+            audioLink = videoLink.split("DASH_")[0] + "DASH_audio.mp4" + videoLink.split(".mp4")[1]
+            urllib.request.urlretrieve(
+                audioLink,
+                filename="tmp/audio"+str(vid)+".mp4",
+            )
 
-        clip = VideoFileClip("tmp/video"+str(vid)+".mp4")
+            clip = VideoFileClip("tmp/video"+str(vid)+".mp4")
 
-        h = AudioFileClip("tmp/audio"+str(vid)+".mp4")
-        h.write_audiofile("tmp/video"+str(vid)+".mp3")
-        audioclip = AudioFileClip("tmp/video"+str(vid)+".mp3")
+            h = AudioFileClip("tmp/audio"+str(vid)+".mp4")
+            h.write_audiofile("tmp/video"+str(vid)+".mp3")
+            audioclip = AudioFileClip("tmp/video"+str(vid)+".mp3")
 
-        videoclip = clip.set_audio(audioclip)
+            videoclip = clip.set_audio(audioclip)
 
-        videoclip.write_videofile("input/output"+str(vid)+".mp4")
+            videoclip.write_videofile("input/output"+str(vid)+".mp4")
+        except:
+            pass
 def combineVideos():
     logStr("Combining into compilation")
     clips = []
@@ -78,8 +81,8 @@ def clearInput():
     for f in files:
         os.remove(f)
 
-getVideos(int(input("How many videos to scrape?")))
+getVideos(int(input("How many videos to scrape? (maximum)")))
 clearTmp()
 combineVideos()
-# clearInput()
+clearInput()
 logStr("Done!")
