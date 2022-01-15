@@ -63,8 +63,8 @@ def combineVideos():
             print(filename)
             clips.append(VideoFileClip("input/"+filename))
 
-    final_clip = concatenate_videoclips(clips)
-    final_clip.write_videofile("final_output.mp4")
+    final_clip = concatenate_videoclips(clips,method='compose')
+    final_clip.write_videofile("final_output.mp4",fps=24)
 
 def clearTmp():
     logStr("Clearing temporary files")
