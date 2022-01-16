@@ -14,14 +14,14 @@ def logStr(string):
 
 def getVideos(amount):
     logStr("Getting videos from Reddit")
-    reddit = praw.Reddit(client_id='JN1Od4POfxHFLw',
-                     client_secret='MULo2NdZ9jPID9PDeI8cL01mTaQ',
+    reddit = praw.Reddit(client_id='id',
+                     client_secret='secret',
                      user_agent='reddit->discord bot')
 
     subs = ["PlayItAgainSam", "funny", "ContagiousLaughter",]
     posts = []
     for sub in subs:
-        posts += list(reddit.subreddit(sub).new(limit=10))
+        posts += list(reddit.subreddit(sub).new(limit=round(amount/len(subs))))
 
     videoLinks = []
     for post in posts:
