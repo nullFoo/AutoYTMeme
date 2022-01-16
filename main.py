@@ -17,7 +17,7 @@ def getVideos(amount):
     logStr("Getting videos from Reddit")
     reddit = praw.Reddit(client_id=secrets.clientID,
                      client_secret=secrets.clientSecret,
-                     user_agent='fooapp')
+                     user_agent=secrets.prawName)
 
     subs = ["PlayItAgainSam", "funny", "ContagiousLaughter",]
     posts = []
