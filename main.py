@@ -4,6 +4,7 @@ import praw
 import requests
 import urllib.request
 import glob
+import secrets
 
 def logStr(string):
     print("")
@@ -14,9 +15,9 @@ def logStr(string):
 
 def getVideos(amount):
     logStr("Getting videos from Reddit")
-    reddit = praw.Reddit(client_id='id',
-                     client_secret='secret',
-                     user_agent='reddit->discord bot')
+    reddit = praw.Reddit(client_id=secrets.clientID,
+                     client_secret=secrets.clientSecret,
+                     user_agent='fooapp')
 
     subs = ["PlayItAgainSam", "funny", "ContagiousLaughter",]
     posts = []
