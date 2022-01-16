@@ -1,3 +1,4 @@
 input/
 tmp/
 secrets.py
+__pycache__/
